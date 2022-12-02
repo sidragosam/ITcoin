@@ -18,17 +18,17 @@ public class MerkleTree {
         try{
             messageDigest = MessageDigest.getInstance("SHA-256");
         } catch (Exception e){
-            System.err.println("Message Digest Error: " + e.toString());
+            System.err.println("Message Digest Error: " + e);
         }
     }
 
-    public void addTransaction(Transaction transaction, Key publicKey){
+    public void addTransaction(Transaction transaction, Key privateKey){
         transactions.add(transaction);
         byte[] messageHash = messageDigest.digest(transaction.toString().getBytes(StandardCharsets.UTF_8));
         try {
             Cipher c = Cipher.getInstance("RSA");
-            c.init(Cipher.ENCRYPT_MODE, publicKey);
-            c.init(Cipher.ENCRYPT_MODE, publicKey);
+            c.init(Cipher.ENCRYPT_MODE, privateKey);
+            c.init(Cipher.ENCRYPT_MODE, privateKey);
             byte[] signature = c.doFinal(messageHash);
             transaction.setSignature(signature);
         } catch (Exception e) {

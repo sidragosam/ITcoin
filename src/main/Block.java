@@ -6,7 +6,7 @@ import java.util.Date;
 public class Block {
     public final int ZEROS = 5;
     private String hash;
-    private String previousHash;
+    private final String previousHash;
     private MerkleTree merkleTree;
     private Date timestamp;
     private int nonce;
@@ -28,21 +28,16 @@ public class Block {
     }
 
     public String generateHash(){
-        return Hash.hash(this.previousHash + this.timestamp.toString() + String.valueOf(nonce) + merkleTree.getHash());
+        return Hash.hash(this.previousHash + this.timestamp.toString() + nonce + merkleTree.getHash());
     }
 
-    public void addTransaction(Key publicKey, String message){
-        merkleTree.addTransaction(new Transaction(message, new Date()), publicKey);
+    public void addTransaction(Key privateKey, String message){
+        merkleTree.addTransaction(new Transaction(message, new Date()), privateKey);
     }
 
     public static String zerosOfLength(int length)
     {
-        String result = "";
-        for(int i = 0; i < length; i++)
-        {
-            result += "0";
-        }
-        return result;
+        return "0".repeat(Math.max(0, length));
     }
 
     public String getHash() {

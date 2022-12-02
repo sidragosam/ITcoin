@@ -3,8 +3,8 @@ package main;
 import java.security.KeyPair;
 
 public class User {
-    private String name = "";
-    private String privateKey = "";
+    private String name;
+    private String privateKey;
 
     public String getName() {
         return name;

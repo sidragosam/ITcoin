@@ -1,5 +1,5 @@
 package main;
-
+//privát kulccsal írunk alá, nem public-kal
 import java.security.KeyPair;
 import java.util.Scanner;
 
@@ -25,7 +25,7 @@ public class Main {
                     try {
                         System.out.println("Type the message: ");
                         String sinput = readStringInput();
-                        blockchain.addTransaction(kpRSA.getPublic(), sinput);
+                        blockchain.addTransaction(kpRSA.getPrivate(), sinput);
                         System.out.println(sinput + " sent.");
                         blockchain.addBlock();
                     } catch (Exception e) {
@@ -50,7 +50,7 @@ public class Main {
                 case 4:
                     System.out.println("Type in the username: ");
                     String userinput = readStringInput();
-                    System.out.println("Type in the public key: ");
+                    System.out.println("Type in the private key: ");
                     String keyinput = readStringInput();
                     User user = new User(userinput, keyinput);
                     kpRSA = user.generateRSAforUser();

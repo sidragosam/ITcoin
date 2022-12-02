@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class Transaction {
-    private String message;
-    private Date date;
+    private final String message;
+    private final Date date;
     private byte[] signature;
 
     public Transaction(String message, Date date) {
